@@ -1,0 +1,5 @@
+id;name;basic_info;price;experience;status;image_path
+1;Бекболат;Мастер Бекболат специализируется на классических и современных стрижках;3500;9 лет;Expert;https://mukhqmed.github.io/images/bekbolat.jpg
+2;Ерасыл;Ерасыл - наш эксперт по стрижке бороды и уходу за ней, поэтому вы будете выглядеть безупречно;3500;6 лет;Senior;https://mukhqmed.github.io/images/master2.jpeg
+3;Иван;Точная техника бритья мастера Ивана обеспечит вам комфортное и тщательное бритье;3000;5 лет;Senior;https://mukhqmed.github.io/images/master3.jpeg
+4;Ерсин;Ерсин - наш самый молодой специалист. Он всегда в курсе последних трендов и техник.;1500;1 год;Junior;https://mukhqmed.github.io/images/master4.jpeg
