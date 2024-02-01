@@ -40,23 +40,12 @@ func rateLimiter(duration time.Duration) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		select {
 		case <-ticker.C:
-			// Allow request to proceed
 			c.Next()
 		default:
-			// Too many requests
 			log.Warn("Rate limit hit")
 			c.AbortWithStatusJSON(http.StatusTooManyRequests, gin.H{"error": "Too many requests"})
 		}
 	}
-}
-
-// endpoint1Handler handles requests for the /endpoint1 route
-func endpoint1Handler(c *gin.Context) {
-	// Your logic here
-	// For example, sending a response:
-	c.JSON(http.StatusOK, gin.H{
-		"message": "This is endpoint 1",
-	})
 }
 
 func main() {
@@ -146,7 +135,7 @@ func getBarbersFromDB() ([]Barber, error) {
 func getFilteredBarbersFromDB(statusFilter, experienceFilter, sortBy, pageStr string, itemsPerPage int) ([]Barber, error) {
 	page, err := strconv.Atoi(pageStr)
 	if err != nil || page < 1 {
-		page = 1 // Defaulting to the first page if there's an error
+		page = 1
 	}
 
 	query := "SELECT id, name, basic_info, price, experience, status, image_path FROM barbers WHERE true"
@@ -166,7 +155,7 @@ func getFilteredBarbersFromDB(statusFilter, experienceFilter, sortBy, pageStr st
 
 	rows, err := db.Query(query)
 	if err != nil {
-		return nil, err // Propagating the error up
+		return nil, err
 	}
 	defer rows.Close()
 
@@ -174,13 +163,13 @@ func getFilteredBarbersFromDB(statusFilter, experienceFilter, sortBy, pageStr st
 	for rows.Next() {
 		var b Barber
 		if err := rows.Scan(&b.ID, &b.Name, &b.BasicInfo, &b.Price, &b.Experience, &b.Status, &b.ImagePath); err != nil {
-			return nil, err // Propagating the error up
+			return nil, err
 		}
 		barbers = append(barbers, b)
 	}
 	if err := rows.Err(); err != nil {
-		return nil, err // Propagating the error up
+		return nil, err
 	}
 
-	return barbers, nil // Returning the result along with a nil error
+	return barbers, nil
 }
